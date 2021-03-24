@@ -1,0 +1,3 @@
+aggregate project Build is
+  for Project_Files use ("build/gtest.gpr", "build/src.gpr");
+end Build;

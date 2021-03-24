@@ -1,0 +1,7 @@
+abstract project Shared is
+  for Source_Files use ();
+  Root_Dir := Shared'Project_Dir & "../";
+  package Compiler is
+    for Default_Switches("C++") use ("--std=c++17");
+  end Compiler;
+end Shared;
