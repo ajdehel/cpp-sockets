@@ -1,0 +1,22 @@
+with "shared.gpr";
+
+library project GTest is
+    usr_inc := "/usr/include/gtest/";
+    usr_src := "/usr/src/googletest/googletest/";
+    for Library_Name use "gtest";
+    for Languages   use ("C++");
+    for Source_Dirs use (usr_inc, usr_src, usr_src & "src/" );
+    for Object_Dir  use "external/obj";
+    for Library_Dir use "external/gtest";
+    package Naming is
+      for Body_Suffix ("C++") use ".cc";
+    end Naming;
+    package Compiler extends Shared.Compiler is
+      for Default_Switches ("C++") use ("-pthread");
+    end Compiler;
+    package Binder is
+      for Default_Switches ("C++") use ("-pthread");
+    end Binder;
+    Linker_Switches := ("-pthread");
+
+end GTest;
