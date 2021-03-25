@@ -3,9 +3,9 @@
 
 /******************************************************************************/
 template<class T>
-int to_int (std::vector<T> flags)
+int to_int ( std::vector<T> flags )
 {
-  int flags_;
+  int flags_ = 0;
   for ( T flag : flags )
   {
     flags_ |= static_cast<int>(flag);
@@ -19,7 +19,7 @@ template int to_int<Msgflag_E>( std::vector<Msgflag_E> flags );
 
 /******************************************************************************/
 template<class T>
-std::vector<T> to_vector ( int flags)
+std::vector<T> to_vector ( int flags )
 {
   std::vector<T> flags_;
   for ( unsigned int i_flag = 1; i_flag < (1 << 31); i_flag <<= 1 )

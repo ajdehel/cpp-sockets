@@ -1,7 +1,6 @@
 
 #include "Socket.h"
 
-#include <iostream>
 #include <system_error>
 
 #include <cerrno>
@@ -145,7 +144,6 @@ int Socket::Send( const void *buf, const size_t len,
         throw std::system_error(error);
     }
   }
-  std::cout << bytes << std::endl;
   return bytes;
 }
 

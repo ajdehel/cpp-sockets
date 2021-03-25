@@ -30,17 +30,8 @@ int main(int argc, char *argv[])
       {
         std::reverse_iterator<std::vector<uint8_t>::iterator> from (recv_buffer.end());
         std::reverse_iterator<std::vector<uint8_t>::iterator> until (recv_buffer.begin());
-        for (auto ichar : recv_buffer)
-          std::cout << ichar;
-        std::cout << " was received" << std::endl;
         send_buffer.assign(from, until);
-        if ( server.Send( send_buffer, false ) )
-        {
-          std::cout << "Sent." << std::endl << std::flush;
-          for (auto ichar : send_buffer)
-            std::cout << ichar;
-          std::cout << std::endl;
-        }
+        server.Send( send_buffer, false );
       }
     }
     std::cout << "Stopped." << std::endl << std::flush;
