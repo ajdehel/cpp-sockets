@@ -43,13 +43,7 @@ bool UDPSocket::Bind( int port )
 }
 
 /******************************************************************************/
-bool UDPSocket::Sendto( std::vector<uint8_t> &buffer,
-                        const std::string &address, const int &port )
-{
-  std::vector<Msgflag_E> flags;
-  return Sendto( buffer, address, port, flags );
-}
-bool UDPSocket::Sendto( std::vector<uint8_t> &buffer,
+bool UDPSocket::Sendto( const std::vector<uint8_t> &buffer,
                         const std::string &address, const int &port,
                         const std::vector<Msgflag_E>& flags )
 {
@@ -66,11 +60,6 @@ bool UDPSocket::Sendto( std::vector<uint8_t> &buffer,
 }
 
 /******************************************************************************/
-bool UDPSocket::Recvfrom( std::vector<uint8_t> &buffer, std::string &address, int &port )
-{
-  std::vector<Msgflag_E> flags;
-  return Recvfrom( buffer, address, port, flags );
-}
 bool UDPSocket::Recvfrom( std::vector<uint8_t> &buffer, std::string &address, int &port,
                const std::vector<Msgflag_E>& flags )
 {

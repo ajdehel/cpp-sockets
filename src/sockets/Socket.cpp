@@ -195,7 +195,7 @@ int Socket::Recvfrom( void *buf, size_t len,
                       const std::vector<Msgflag_E> &flags )
 {
   int flags_ = to_int<Msgflag_E>(flags);
-  int bytes = recv(_fd, buf, len, flags_);
+  int bytes = recvfrom(_fd, buf, len, flags_, addr, addr_len);
   if (0 > bytes)
   {
     std::errc ec = static_cast<std::errc>(errno);

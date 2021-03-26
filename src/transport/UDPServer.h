@@ -12,9 +12,15 @@ class UDPServer
     UDPServer();
     ~UDPServer();
     UDPServer( UDPSocket&& );
+
     bool Bind( int );
-    bool Send( std::vector<uint8_t>&, bool blocks=true );
-    bool Recv( std::vector<uint8_t>&, bool blocks=true );
+
+    bool Sendto( const std::vector<uint8_t>&,
+                 const std::string&, const int,
+                 bool blocks=true );
+    bool Recvfrom( std::vector<uint8_t>&,
+                   std::string&, int&,
+                   bool blocks=true );
 
   private:
     UDPSocket *_sock;
