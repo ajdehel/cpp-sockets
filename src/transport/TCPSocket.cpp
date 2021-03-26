@@ -43,16 +43,9 @@ bool TCPSocket::Bind( int port )
 }
 
 /******************************************************************************/
-bool TCPSocket::Connect( std::string address, int port )
+bool TCPSocket::Listen( int backlog )
 {
-  sockaddr_in connaddr;
-  in_addr inet_address;
-  if ( 0 == inet_aton(address.c_str(), &inet_address) )
-    return false;
-  connaddr.sin_family      = AF_INET;
-  connaddr.sin_addr.s_addr = inet_address.s_addr;
-  connaddr.sin_port        = htons(port);
-  return Socket::Connect( (sockaddr*)&connaddr, sizeof(connaddr) );
+  return Socket::Listen( backlog );
 }
 
 /******************************************************************************/
@@ -66,14 +59,29 @@ TCPSocket TCPSocket::Accept( void )
 }
 
 /******************************************************************************/
-bool TCPSocket::Send( std::vector<uint8_t> &buffer, const std::vector<Msgflag_E> &flags )
+bool TCPSocket::Connect( std::string address, int port )
+{
+  sockaddr_in connaddr;
+  in_addr inet_address;
+  if ( 0 == inet_aton(address.c_str(), &inet_address) )
+    return false;
+  connaddr.sin_family      = AF_INET;
+  connaddr.sin_addr.s_addr = inet_address.s_addr;
+  connaddr.sin_port        = htons(port);
+  return Socket::Connect( (sockaddr*)&connaddr, sizeof(connaddr) );
+}
+
+/******************************************************************************/
+bool TCPSocket::Send( const std::vector<uint8_t> &buffer,
+                      const std::vector<Msgflag_E> &flags )
 {
   int bytes = Socket::Send( buffer.data(), buffer.size(), flags );
   return 0 <= bytes;
 }
 
 /******************************************************************************/
-bool TCPSocket::Recv( std::vector<uint8_t> &buffer, const std::vector<Msgflag_E> &flags )
+bool TCPSocket::Recv( std::vector<uint8_t> &buffer,
+                      const std::vector<Msgflag_E> &flags )
 {
   buffer.resize(buffer.capacity());
   int bytes = Socket::Recv( buffer.data(), buffer.capacity(), flags );

@@ -19,7 +19,6 @@ class Socket
     bool operator=( Socket&& );
 
     bool Close( void );
-    bool Listen( int backlog );
 
     const int  get_fd() const;
     const int  get_bound_port() const;
@@ -31,8 +30,9 @@ class Socket
     void set_bound_port( int );
 
     bool Bind( sockaddr *addr, socklen_t len );
-    bool Connect( sockaddr *addr, socklen_t len );
+    bool Listen( int backlog );
     Socket Accept( sockaddr *addr, socklen_t *len );
+    bool Connect( sockaddr *addr, socklen_t len );
 
     int Send( const void *buf, size_t len, const std::vector<Msgflag_E>& );
     int Sendto( const void *buf, size_t len, const sockaddr *, socklen_t, const std::vector<Msgflag_E>& );

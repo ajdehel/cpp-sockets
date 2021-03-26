@@ -109,14 +109,6 @@ bool Socket::Listen( int backlog )
 }
 
 /******************************************************************************/
-bool Socket::Connect( sockaddr *addr, socklen_t len )
-{
-  if ( 0 != connect(_fd, addr, len) )
-    throw std::system_error(std::error_code(errno, std::system_category()));
-  return true;
-}
-
-/******************************************************************************/
 Socket Socket::Accept( sockaddr *addr, socklen_t *len )
 {
   int connfd = accept(_fd, addr, len);
@@ -124,6 +116,14 @@ Socket Socket::Accept( sockaddr *addr, socklen_t *len )
     throw std::system_error(std::error_code(errno, std::system_category()));
   Socket connsock( connfd );
   return connsock;
+}
+
+/******************************************************************************/
+bool Socket::Connect( sockaddr *addr, socklen_t len )
+{
+  if ( 0 != connect(_fd, addr, len) )
+    throw std::system_error(std::error_code(errno, std::system_category()));
+  return true;
 }
 
 /******************************************************************************/
