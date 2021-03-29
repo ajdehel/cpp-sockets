@@ -1,0 +1,15 @@
+with "gtest.gpr";
+with "shared.gpr";
+
+project Test is
+    Root_Dir := Shared.Root_Dir;
+    for Languages   use ("C++");
+    for Source_Dirs use (Root_Dir&"test/**");
+    for Object_Dir  use "obj/test";
+    for Exec_Dir    use Root_Dir&"bin";
+    for Main        use ("test_all.cpp");
+    package Linker is
+      for Switches("test_all.cpp") use GTest.Linker_Switches;
+    end Linker;
+
+end Test;

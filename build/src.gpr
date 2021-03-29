@@ -1,17 +1,10 @@
-with "shared";
-with "gtest";
+with "shared.gpr";
 
 project Src is
     Root_Dir := Shared.Root_Dir;
     for Languages   use ("C++");
-    for Source_Dirs use (Root_Dir&"src/**");
-    for Object_Dir  use "obj";
+    for Source_Dirs use (Root_Dir&"include/", Root_Dir&"src/**");
+    for Object_Dir  use "obj/src";
     for Exec_Dir    use Root_Dir&"bin";
-    for Main        use ("server.cpp", "client.cpp", "test_all.cpp");
-    package Compiler extends Shared.Compiler is
-      for Switches ("test_all.cpp") use GTest.Compiler'Default_Switches("C++");
-    end Compiler;
-    package Linker is
-      for Switches ("test_all.cpp") use GTest.Linker_Switches;
-    end Linker;
+    for Main        use ("server.cpp", "client.cpp");
 end Src;
